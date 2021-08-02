@@ -3,13 +3,35 @@ const mongoose = require('mongoose')
 const User = require('../models/User')
 
 module.exports = function(passport) {
-    passport.use(new GoogleStrategy({
+    passport.use(new GoogleStrategy({ // google ouath20 sdk
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
             callbackURL: '/auth/google/callback'
         },
+
+        // get user's profile & check in DB
         async(accessToken, refreshToken, profile, done) => {
-            console.log(profile)
+            const newUser = {
+                googleId: profile.id,
+                displayName: profile.displayName,
+                firstName: profile.name.givenName,
+                lastName: profile.name.familyName,
+                image: profile.photos[0].value
+            }
+
+            try {
+                let user = await User.findOne({ googleId: profile.id })
+
+                if (!user) {
+                    user = await User.create(newUser) // create new User
+                }
+                done(null, user)
+            } catch (err) {
+                console.error(err)
+            }
+
+
+
         }))
 
     passport.serializeUser((user, done) => done(null, user.id))
