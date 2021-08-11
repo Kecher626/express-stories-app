@@ -15,10 +15,14 @@ dotenv.config({ path: './config/config.env' })
 // Passport config
 require('./config/passport')(passport)
 
-
 // -----------------Main process-------------------
 const app = express()
 connectDB()
+
+// Body parser
+app.use(express.urlencoded({ extend: false }))
+app.use(express.json())
+
 
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')))
@@ -29,7 +33,20 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Handlebars
-app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+const { formatDate, stripTags, truncate, editIcon } = require('./helpers/hbs')
+
+app.engine('.hbs',
+    exphbs({
+        helpers: {
+            formatDate,
+            stripTags,
+            truncate,
+            editIcon,
+        },
+        defaultLayout: 'main',
+        extname: '.hbs'
+    })
+)
 app.set('view engine', '.hbs')
 
 // Sesssion
@@ -46,9 +63,16 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+// Set global var
+app.use((req, res, next) => {
+    res.locals.user = req.user || null
+    next()
+})
+
 // Routes
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
+app.use('/stories', require('./routes/stories'))
 
 
 const PORT = process.env.PORT || 3000
