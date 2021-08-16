@@ -27,3 +27,5 @@
 8. choose "Web application" type, and name it what you want
 9. ADD URI with your apps, for this project is (http://localhost:3000/auth/google/callback) -> & click "create"
 10. after that, it'll show a client ID and a secret -> add them to your env config
+
+# linux test
