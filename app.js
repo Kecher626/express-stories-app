@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const passport = require('passport')
 const morgan = require('morgan')
+const methodOverride = require('method-override')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
 const MongoDbStore = require('connect-mongo')
@@ -23,6 +24,15 @@ connectDB()
 app.use(express.urlencoded({ extend: false }))
 app.use(express.json())
 
+// Method Override
+app.use(methodOverride(function(req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        // look in urlencoded POST bodies and delete it
+        let method = req.body._method
+        delete req.body._method
+        return method
+    }
+}))
 
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')))

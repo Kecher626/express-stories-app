@@ -10,9 +10,6 @@
 + npm run dev -> devlopment mode
 + npm run start -> production mode
 
-
-
-
 # Steps of Using Google Oauth 
 
 1. open your Browser and search -> google cloud console
