@@ -1,7 +1,7 @@
-# Stories sharing & keeping app
+# Stories Sharing & Keeping App
 This is a full application build of the StoryBooks app which uses Node.js, Express, MongoDB, Passport with a Google OAuth strategy and more.
 
-# Learn the course at [https://www.youtube.com/watch?v=SBvmnHTQIPY&t=213s](https://www.youtube.com/watch?v=SBvmnHTQIPY&t=213s)
+Learn the course at [https://www.youtube.com/watch?v=SBvmnHTQIPY&t=213s](https://www.youtube.com/watch?v=SBvmnHTQIPY&t=213s)
 
 # Install Dependencies
 
@@ -27,5 +27,3 @@ This is a full application build of the StoryBooks app which uses Node.js, Expre
 8. choose "Web application" type, and name it what you want
 9. ADD URI with your apps, for this project is (http://localhost:3000/auth/google/callback) -> & click "create"
 10. after that, it'll show a client ID and a secret -> add them to your env config
-
-# linux test
