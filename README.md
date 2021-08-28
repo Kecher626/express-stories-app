@@ -1,4 +1,7 @@
-# react-chat-app
+# Stories sharing & keeping app
+This is a full application build of the StoryBooks app which uses Node.js, Express, MongoDB, Passport with a Google OAuth strategy and more.
+
+# Learn the course at [https://www.youtube.com/watch?v=SBvmnHTQIPY&t=213s](https://www.youtube.com/watch?v=SBvmnHTQIPY&t=213s)
 
 # Install Dependencies
 
